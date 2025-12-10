@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/shared_widgets.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -7,176 +8,62 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // ==========================================
-      // TOP APP BAR / HEADER
-      // ==========================================
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false, // Hide default back button
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
-            // WRAP THE ICON IN GESTURE DETECTOR
             GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/user_settings'); // Navigate to new screen
-              },
+              onTap: () => Navigator.pushNamed(context, '/user_settings'),
               child: const Icon(Icons.person_outline, color: Colors.black, size: 28),
             ),
-            
             const SizedBox(width: 8),
-            const Text(
-              "Adam",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
+            const Text("Adam", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
             const Spacer(),
             GestureDetector(
-              onTap: () {
-                // Logout Logic
-                // This pushes the Login route and removes ALL previous routes (Dashboard)
-                // so the user cannot press 'back' to return to the app.
-                Navigator.pushNamedAndRemoveUntil(
-                  context, 
-                  '/',              // The route name for LoginScreen (defined in main.dart)
-                  (route) => false  // Predicate: remove everything else
-                );
-              },
-              child: const Row(
-                children: [
-                  Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Icon(Icons.logout, color: Colors.black, size: 20),
-                ],
-              ),
+              onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
+              child: const Row(children: [Text("Logout", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14)), SizedBox(width: 4), Icon(Icons.logout, color: Colors.black, size: 20)]),
             )
           ],
         ),
       ),
-      
-      // ==========================================
-      // BODY CONTENT
-      // ==========================================
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Column(
               children: [
-                // 1. STATS CARDS
-                Row(
-                  children: [
-                    _buildStatCard(
-                      count: "21",
-                      label: "In Progress",
-                      icon: Icons.inventory_2_outlined,
-                      color: const Color(0xFF64FFDA), // Cyan/Teal
-                      textColor: Colors.black,
-                    ),
-                    const SizedBox(width: 16),
-                    _buildStatCard(
-                      count: "7",
-                      label: "Completed",
-                      icon: Icons.check_box_outlined,
-                      color: const Color(0xFFB2FF59), // Light Green
-                      textColor: Colors.black,
-                    ),
-                  ],
-                ),
+                Row(children: [
+                  _buildStatCard(count: "21", label: "In Progress", icon: Icons.inventory_2_outlined, color: const Color(0xFF64FFDA), textColor: Colors.black),
+                  const SizedBox(width: 16),
+                  _buildStatCard(count: "7", label: "Completed", icon: Icons.check_box_outlined, color: const Color(0xFFB2FF59), textColor: Colors.black),
+                ]),
                 const SizedBox(height: 16),
-
-                // 2. SEARCH BAR
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            hintText: "Search Motor",
-                            prefixIcon: Icon(Icons.search, color: Colors.black),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
+                Row(children: [
+                  Expanded(
+                    child: Container(
                       height: 45,
-                      width: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.tune, color: Colors.black),
-                        onPressed: () {},
-                      ),
+                      decoration: BoxDecoration(color: Colors.white, border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(8)),
+                      child: const TextField(decoration: InputDecoration(hintText: "Search Motor", prefixIcon: Icon(Icons.search, color: Colors.black), border: InputBorder.none, contentPadding: EdgeInsets.symmetric(vertical: 10))),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(height: 45, width: 45, decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(8)), child: IconButton(icon: const Icon(Icons.tune, color: Colors.black), onPressed: () {})),
+                ]),
               ],
             ),
           ),
-
           const SizedBox(height: 10),
-
-          // 3. TABLE HEADER
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: Colors.grey[300], // Light grey background for header
-            child: Row(
-              children: [
-                const Expanded(
-                  flex: 2,
-                  child: Text(
-                    "Name",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Expanded(
-                  flex: 3,
-                  child: Text(
-                    "Progress",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Register Motor Logic
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(Icons.add_box_outlined, size: 18),
-                      SizedBox(width: 4),
-                      Text(
-                        "Register Motor",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            color: Colors.grey[300],
+            child: Row(children: [
+              const Expanded(flex: 2, child: Text("Name", style: TextStyle(fontWeight: FontWeight.bold))),
+              const Expanded(flex: 3, child: Text("Progress", style: TextStyle(fontWeight: FontWeight.bold))),
+              InkWell(onTap: () {}, child: Row(children: const [Icon(Icons.add_box_outlined, size: 18), SizedBox(width: 4), Text("Register Motor", style: TextStyle(fontWeight: FontWeight.bold))])),
+            ]),
           ),
-
-          // 4. MOTOR LIST (Placeholder Data)
           Expanded(
             child: ListView(
               children: const [
@@ -191,117 +78,27 @@ class DashboardScreen extends StatelessWidget {
                 MotorListItem(name: "CARD31", status: "Rejected", color: Colors.redAccent),
                 Divider(height: 1),
                 MotorListItem(name: "RDF9203", status: "Inspection", color: Colors.orangeAccent),
-                Divider(height: 1),
               ],
             ),
           ),
         ],
       ),
-
-      // ==========================================
-      // BOTTOM NAVIGATION BAR
-      // ==========================================
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.white,
-        elevation: 4.0,
-        shape: const CircleBorder(),
-        child: Icon(Icons.home, color: Colors.indigo[700], size: 36),
-      ),
+      floatingActionButton: buildHomeFab(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10.0,
-        color: Colors.indigo[700], // Deep Blue Color
-        child: SizedBox(
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              // --- UPDATED SCAN BUTTON ---
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/scan'); // Navigate to Scan Screen
-                },
-                behavior: HitTestBehavior.opaque, // Ensures the whole area is clickable
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.qr_code_scanner, color: Colors.white),
-                    SizedBox(height: 4),
-                    Text("Scan Code", style: TextStyle(color: Colors.white, fontSize: 12))
-                  ],
-                ),
-              ),
-              // ---------------------------
-              // Spacer for the Floating Button
-              const SizedBox(width: 40),
-              // Right Item
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.grid_view, color: Colors.white),
-                  SizedBox(height: 4),
-                  Text("Others", style: TextStyle(color: Colors.white, fontSize: 12))
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: buildBottomNavBar(context, currentRoute: '/dashboard'),
     );
   }
 
-  // --- HELPER WIDGET FOR STAT CARDS ---
-  Widget _buildStatCard({
-    required String count,
-    required String label,
-    required IconData icon,
-    required Color color,
-    required Color textColor,
-  }) {
+  Widget _buildStatCard({required String count, required String label, required IconData icon, required Color color, required Color textColor}) {
     return Expanded(
       child: Container(
-        height: 100,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(12),
-        ),
+        height: 100, padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Icon in a white circle
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(icon, color: color, size: 24),
-            ),
-            // Text Info
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  count,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: textColor.withOpacity(0.8),
-                  ),
-                ),
-              ],
-            ),
+            Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: Icon(icon, color: color, size: 24)),
+            Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [Text(count, style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: textColor)), Text(label, style: TextStyle(fontSize: 12, color: textColor.withOpacity(0.8)))]),
           ],
         ),
       ),
@@ -309,63 +106,17 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-// --- HELPER WIDGET FOR LIST ITEMS ---
 class MotorListItem extends StatelessWidget {
   final String name;
   final String status;
   final Color color;
-
-  const MotorListItem({
-    super.key,
-    required this.name,
-    required this.status,
-    required this.color,
-  });
-
+  const MotorListItem({super.key, required this.name, required this.status, required this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       color: Colors.white,
-      child: Row(
-        children: [
-          // Motor Name
-          Expanded(
-            flex: 2,
-            child: Text(
-              name,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
-            ),
-          ),
-          // Status Indicator
-          Expanded(
-            flex: 3,
-            child: Row(
-              children: [
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  status,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      child: Row(children: [Expanded(flex: 2, child: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15))), Expanded(flex: 3, child: Row(children: [Container(width: 12, height: 12, decoration: BoxDecoration(color: color, shape: BoxShape.circle)), const SizedBox(width: 8), Text(status, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14))]))]),
     );
   }
 }
