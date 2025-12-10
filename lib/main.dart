@@ -21,9 +21,8 @@ class DMRInventoryApp extends StatelessWidget {
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
-        fontFamily: 'Arial', // SRS requirement
+        fontFamily: 'Arial',
       ),
-      // Simple Named Route Navigation
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),

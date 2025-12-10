@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/shared_widgets.dart'; // Import reusable widgets
+import '../widgets/shared_widgets.dart'; 
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -19,16 +19,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Future<void> _handleRegister() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-
-      // Simulate Firebase User Creation
       await Future.delayed(const Duration(seconds: 2));
-      
       if (mounted) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Account Created! Please Login.')),
-        );
-        Navigator.pop(context); // Go back to Login
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account Created! Please Login.')));
+        Navigator.pop(context);
       }
     }
   }
@@ -39,10 +34,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
+        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () => Navigator.pop(context)),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -52,53 +44,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Create Account',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
+                const Text('Create Account', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
-                Text(
-                  'Join the DMR Inventory System',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                ),
+                Text('Join the DMR Inventory System', style: TextStyle(color: Colors.grey[600], fontSize: 14)),
                 const SizedBox(height: 30),
-
-                // Username
-                buildLabel('Username'),
-                const SizedBox(height: 8),
-                buildTextField(
-                  controller: _usernameController,
-                  hint: 'Choose a username',
-                ),
+                buildLabel('Username'), const SizedBox(height: 8),
+                buildTextField(controller: _usernameController, hint: 'Choose a username'),
                 const SizedBox(height: 15),
-
-                // Email
-                buildLabel('Email Address'),
-                const SizedBox(height: 8),
-                buildTextField(
-                  controller: _emailController,
-                  hint: 'Enter your email',
-                  inputType: TextInputType.emailAddress,
-                ),
+                buildLabel('Email Address'), const SizedBox(height: 8),
+                buildTextField(controller: _emailController, hint: 'Enter your email', inputType: TextInputType.emailAddress),
                 const SizedBox(height: 15),
-
-                // Password
-                buildLabel('Password'),
-                const SizedBox(height: 8),
-                buildTextField(
-                  controller: _passwordController,
-                  hint: 'Create a password',
-                  isObscure: true,
-                ),
+                buildLabel('Password'), const SizedBox(height: 8),
+                buildTextField(controller: _passwordController, hint: 'Create a password', isObscure: true),
                 const SizedBox(height: 15),
-
-                // Confirm Password
-                buildLabel('Confirm Password'),
-                const SizedBox(height: 8),
+                buildLabel('Confirm Password'), const SizedBox(height: 8),
                 buildTextField(
                   controller: _confirmPasswordController,
                   hint: 'Re-enter password',
@@ -109,19 +68,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   }
                 ),
                 const SizedBox(height: 25),
-
-                // Register Button
                 SizedBox(
                   width: double.infinity,
                   height: 45,
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _handleRegister,
                     style: primaryButtonStyle,
-                    child: _isLoading
-                        ? const SizedBox(
-                            height: 20, width: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
-                        : const Text('Register', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: _isLoading ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black)) : const Text('Register', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
