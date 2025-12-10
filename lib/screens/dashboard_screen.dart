@@ -16,7 +16,14 @@ class DashboardScreen extends StatelessWidget {
         automaticallyImplyLeading: false, // Hide default back button
         title: Row(
           children: [
-            const Icon(Icons.person_outline, color: Colors.black, size: 28),
+            // WRAP THE ICON IN GESTURE DETECTOR
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/user_settings'); // Navigate to new screen
+              },
+              child: const Icon(Icons.person_outline, color: Colors.black, size: 28),
+            ),
+            
             const SizedBox(width: 8),
             const Text(
               "Adam",
