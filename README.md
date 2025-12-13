@@ -10,68 +10,80 @@ lib/
 ├── screens/
 │   ├── dashboard_screen.dart
 │   ├── login_screen.dart
-│   └── registration_screen.dart
+│   ├── registration_screen.dart
+│   ├── scan_screen.dart
+│   ├── user_settings_screen.dart
+│   ├── motor_details_screen.dart
+│   └── motor_issues_screen.dart
 └── widgets/
     └── shared_widgets.dart
-    
-## 📋 About The Project
-The **Sub-Warehouse Motor Inventory Management System** is a centralized mobile application designed for **Daiken Miri Sdn. Bhd. (DMR)**. 
 
-Currently, DMR uses scattered Excel sheets for motor tracking, leading to data fragmentation and inefficiencies[cite: 43, 44]. ]This project digitalizes these operations, providing a native Android application that facilitates real-time tracking, secure data storage, and visual warehouse management[cite: 45, 46].
+📋 About The Project
+The Sub-Warehouse Motor Inventory Management System is a centralized mobile application designed for Daiken Miri Sdn. Bhd. (DMR).
 
-## ✨ Key Features
-This system is designed with two distinct user roles: **Administrators** and **Technicians**[cite: 103, 108].
+Currently, DMR uses scattered Excel sheets for motor tracking, leading to data fragmentation and inefficiencies. This project digitalizes these operations, providing a native Android application that facilitates real-time tracking, secure data storage, and visual warehouse management.
 
-### 🛠 Technician Module
-**Real-time Status Updates:** Change motor status (e.g., In-Use, In-Repair, Damaged) instantly[cite: 182].
-**Visual Warehouse Map:** Locate motors using a digital map of racks, levels, and sections[cite: 176].
-**Search:** Quickly find motors by ID, Tag, or Technical Specifications (HP, RPM, Voltage)[cite: 174].
-**Service History:** View complete repair and maintenance logs[cite: 185].
+✨ Key Features
+This system is designed with two distinct user roles: Administrators and Technicians.
 
-### 🛡️ Administrator Module
-**User Management:** Create accounts and assign roles (RBAC)[cite: 172].
-**Inventory Control:** Perform CRUD operations on motor records[cite: 179].
-**Layout Configuration:** Dynamically modify the warehouse structure (racks/partitions)[cite: 176].
+🛠 Technician Module
+Register Motor: New workflow to register motors, capture details, and log initial defects/issues.
 
-## 📱 Tech Stack
-**Frontend:** Flutter (Dart) [cite: 101]
-**Backend:** Google Firebase (Authentication & Firestore) [cite: 101, 148]
-**Platform:** Native Android [cite: 100]
-**Hardware Features:** Camera integration for OCR/Condition Capture [cite: 147]
+Real-time Status Updates: Change motor status (e.g., In-Use, In-Repair, Damaged) instantly.
 
-## 🚀 Getting Started
+Visual Warehouse Map: Locate motors using a digital map of racks, levels, and sections.
 
-### Prerequisites
-* **Android Studio** with Flutter SDK installed.
-**Android Device/Emulator** (Min RAM: 3GB, Android 10.0+)[cite: 123, 153].
-Active Internet connection (Wi-Fi/Cellular) for Firebase sync[cite: 119].
+Search: Quickly find motors by ID, Tag, or Technical Specifications (HP, RPM, Voltage).
 
-### Installation
-1.  Clone the repository:
-    ```bash
+Service History: View complete repair and maintenance logs.
+
+Scan Code: Interface for barcode/QR scanning to retrieve motor details.
+
+🛡️ Administrator Module
+User Management: Create accounts and assign roles (RBAC).
+
+Inventory Control: Perform CRUD operations on motor records.
+
+Layout Configuration: Dynamically modify the warehouse structure (racks/partitions).
+
+📱 Tech Stack
+Frontend: Flutter (Dart)
+
+Backend: Google Firebase (Authentication & Firestore)
+
+Platform: Native Android
+
+Hardware Features: Camera integration for OCR/Condition Capture
+
+🚀 Getting Started
+Prerequisites
+Android Studio with Flutter SDK installed.
+
+Android Device/Emulator (Min RAM: 3GB, Android 10.0+).
+
+Active Internet connection (Wi-Fi/Cellular) for Firebase sync. 
+
+Installation
+1. Clone the repository:
     git clone [https://github.com/your-username/dmr-inventory-system.git](https://github.com/your-username/dmr-inventory-system.git)
-    ```
+
 2.  Navigate to the project directory:
-    ```bash
     cd dmr-inventory-system
-    ```
+
 3.  Install dependencies:
-    ```bash
     flutter pub get
-    ```
+
 4.  Run the app:
-    ```bash
     flutter run
-    ```
 
-> **Note:** This project requires a valid `google-services.json` file to connect to the Firebase backend. 
+Note: This project requires a valid google-services.json file to connect to the Firebase backend.
 
-## 👥 The Team (Quantum Savants)
-* **Jeremy Tommy Ajeng Emang** (99286)
-* **Dexter Skudd anak John Rizal** (101630)
-* **Muhammad Faiq bin Suhadi** (82723)
-* **Eamonn Nathanael Jong Kwok** (83691)
-* **Victor Aezekiel Isaac Zeno** (86251)
-* **Naomi Ruran Odau** (97620)
+👥 The Team (Quantum Savants)
+Jeremy Tommy Ajeng Emang (99286)
+Dexter Skudd anak John Rizal (101630)
+Muhammad Faiq bin Suhadi (82723)
+Eamonn Nathanael Jong Kwok (83691)
+Victor Aezekiel Isaac Zeno (86251)
+Naomi Ruran Odau (97620)
 
----
+Prepared for Software Engineering Lab (TMA3084), UNIMAS.
